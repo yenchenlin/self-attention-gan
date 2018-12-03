@@ -74,12 +74,13 @@ flags.DEFINE_integer('eval_interval_secs', 300,
 
 flags.DEFINE_integer('num_classes', 1000, 'The number of classes in the dataset')
 flags.DEFINE_string('generator_type', 'test', 'test or baseline')
+flags.DEFINE_integer('trained_size', 100000, 'The number of data used to train the model')
 
 FLAGS = flags.FLAGS
 
 
 def main(_):
-  model_dir = '%s_%s' % ('imagenet', FLAGS.batch_size)
+  model_dir = '%s_%s_%s' % ('imagenet', FLAGS.batch_size, FLAGS.trained_size)
   FLAGS.eval_dir = FLAGS.checkpoint_dir + '/eval'
   checkpoint_dir = os.path.join(FLAGS.checkpoint_dir, model_dir)
   log_dir = os.path.join(FLAGS.eval_dir, model_dir)
