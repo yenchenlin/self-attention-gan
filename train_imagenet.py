@@ -59,6 +59,7 @@ flags.DEFINE_boolean('sync_replicas', True, 'Whether to sync replicas. [True]')
 flags.DEFINE_integer('num_towers', 4, 'The number of GPUs to use per task. [1]')
 flags.DEFINE_integer('d_step', 1, 'The number of D_step')
 flags.DEFINE_integer('g_step', 1, 'The number of G_step')
+flags.DEFINE_integer('train_size', 10000000, 'The number of data used to train the model')
 
 # flags.DEFINE_integer('z_dim', 128, 'The dimension of z')
 
@@ -75,7 +76,7 @@ def main(_, is_test=False):
   print('Starting the program..')
   gfile.MakeDirs(FLAGS.checkpoint_dir)
 
-  model_dir = '%s_%s' % ('imagenet', FLAGS.batch_size)
+  model_dir = '%s_%s_%s' % ('imagenet', FLAGS.batch_size, FLAGS.train_size)
   logdir = os.path.join(FLAGS.checkpoint_dir, model_dir)
   gfile.MakeDirs(logdir)
 
